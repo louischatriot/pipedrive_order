@@ -1,17 +1,22 @@
 javascript:
 (function() {
+
   function get_amount(box) {
+    var res = -1;
+
     try {
-      var a = box.children[0].children[0].children[0].children[0].children[2].children[0];
+      var a = box.children[0].children[0].children[0].children[0].children[2].children[1];
       a = a.innerHTML;
       a = a.replace(/\&nbsp;€/, "");
       a = a.replace(/ /g, "");
       a = parseInt(a, 10);
 
-      return a;
+      res = a;
     } catch(e) {
-      return -1;
+      res = -1;
     }
+
+    return res;
   };
 
   function get_nodes(boxes) {
@@ -46,8 +51,9 @@ javascript:
   };
 
   var stages = document.querySelectorAll("div[data-test^=stage-][data-test-stage-index]");
+  var N = stages.length;
 
-  for (var i = 0; i < stages.length; i += 1) {
+  for (var i = 0; i < N; i += 1) {
     reorder_stage(stages[i]);
   }
 })()
